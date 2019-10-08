@@ -1,0 +1,17 @@
+<% errors = model.errors %>
+
+<% if errors.any? %>
+  <div class="alert alert-danger">
+    <div class="lead buffer-bottom">
+      <% count = errors.count%>
+      В вашей форме <%= count %>
+      <%= I18n.t("activerecord.attributes.event.mistake", count: count) %>
+    </div>
+
+    <ul>
+      <% errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

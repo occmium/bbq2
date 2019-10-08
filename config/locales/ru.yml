@@ -1,0 +1,59 @@
+ru:
+  # Перевод моделей
+  activerecord:
+    # Перевод названия моделей
+    models:
+      user: 'Пользователь'
+      event: 'Событие'
+    # Перевод атрибутов моделей
+    attributes:
+      user:
+        email: 'Адрес электронной почты'
+        name: 'Имя'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        remember_me: 'Запомнить меня'
+      event:
+        title: 'Название'
+        address: 'Место проведения'
+        datetime: 'Дата и время'
+        description: 'Описание'
+        #  Задача 55_1
+        mistake:
+          one: 'ошибка'
+          few: 'ошибки'
+          many:
+      subscription:
+        user_name: 'Ваша представьтесь'
+        user_email: 'Ваша электронная почта'
+      comment:
+        body: 'Ваш комментарий'
+        user_name: 'Ваша представьтесь'
+  # Перевод сообщений, которые отправляет контроллер
+  controllers:
+    subscriptions:
+      created: 'Вы подписаны на это событие'
+      destroyed: 'Участник отписан'
+      error: 'Подписка/отписка не сработала'
+    comments:
+      destroyed: 'Комментарий удален'
+      created: 'Ваш комментарий добавлен'
+      error: 'Ошибка с комментарием'
+    events:
+      created: 'Вы создали новое мероприятие'
+      updated: 'Вы обновили мероприятие'
+      destroyed: 'Вы удалили мероприятие'
+    users:
+      updated: 'Вы обновили свой профиль'
+  app:
+    name: 'Шашлыки'
+    company: 'Хороший программист'
+  are_you_sure: 'Вы уверены?'
+  comments:
+    comment:
+      destroy_confirm: 'Вы уверены, что хотите удалить этот комментарий?'
+  subscriptions:
+    subscription:
+      destroy_confirm: 'Вы уверены, что хотите удалить эту подписку?'
+      cannot_subscribe_to_yourself: 'не может подписаться на своё собственное событие!'
+      is_already_registered: 'зарегистрирована. Ипользуйте Войти для подписки'

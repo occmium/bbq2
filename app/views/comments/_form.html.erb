@@ -1,0 +1,37 @@
+<%#= form_with(model: comment, local: true) do |form| %>
+  <%# if comment.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2><%#= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>-->
+
+<!--      <ul>-->
+      <%# comment.errors.full_messages.each do |message| %>
+<!--        <li><%#= message %></li>-->
+      <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div class="actions">-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+
+<%= form_for [@event, comment] do |f| %>
+  <%= render partial: 'partials/form_errors', locals: {model: comment} %>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+
+  <% unless user_signed_in? %>
+    <div class="form-group">
+      <%= f.label :user_name %>
+      <%= f.text_field :user_name, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit 'Отправить', class: 'btn btn-primary' %>
+  </div>
+<% end %>
