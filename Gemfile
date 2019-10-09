@@ -37,6 +37,8 @@ gem 'carrierwave'
 
 gem 'rmagick'
 
+gem 'fog-aws'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

@@ -4,7 +4,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Файлы хранятся в спец. папке проекта локально
-  storage :file
+  if Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   # Папка, в которой будут храниться все наши загруженные файлы
   # например, uploads/avatar/avatar/1

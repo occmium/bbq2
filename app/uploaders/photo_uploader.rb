@@ -4,7 +4,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Изображения будут храниться локально в специальной папке проекта
-  storage :file
+  if Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   # Папка, в которой будут храниться все наши загруженные файлы
   # Например, uploads/photo/photo/1
