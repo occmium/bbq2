@@ -5,6 +5,8 @@ ru:
     models:
       photo: 'Фотография'
       user: 'Пользователь'
+#      subscription: 'Подписка'
+#      comment: 'Комментарий'
       event: 'Событие'
     # Перевод атрибутов моделей
     attributes:
