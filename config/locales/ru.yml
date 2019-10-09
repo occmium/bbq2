@@ -3,13 +3,17 @@ ru:
   activerecord:
     # Перевод названия моделей
     models:
+      photo: 'Фотография'
       user: 'Пользователь'
       event: 'Событие'
     # Перевод атрибутов моделей
     attributes:
+      photo:
+        photo: 'Фотография'
       user:
         email: 'Адрес электронной почты'
         name: 'Имя'
+        avatar: 'Аварар'
         password: 'Пароль'
         password_confirmation: 'Подтверждение пароля'
         remember_me: 'Запомнить меня'
@@ -45,6 +49,10 @@ ru:
       destroyed: 'Вы удалили мероприятие'
     users:
       updated: 'Вы обновили свой профиль'
+    photos:
+      error: 'Что-то не так с фоткой'
+      created: 'Вы добавили фотографию к событию'
+      destroyed: 'Вы удалили фотку'
   app:
     name: 'Шашлыки'
     company: 'Хороший программист'

@@ -26,6 +26,9 @@ class User < ApplicationRecord
   # Мы использовали уже не привычный нам before_action, а after_commit,
   # чтобы быть уверенными, что все валидации прошли и юзер в базе.
 
+  # Аплоадер нужно добавить к модели юзеры
+  mount_uploader :avatar, AvatarUploader
+
   private
 
   def set_name

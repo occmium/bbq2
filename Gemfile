@@ -33,6 +33,10 @@ gem 'uglifier', '>= 1.3.0'
 #
 gem 'jquery-rails'
 
+gem 'carrierwave'
+
+gem 'rmagick'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
