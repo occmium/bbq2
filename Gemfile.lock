@@ -119,6 +119,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
     mimemagic (0.3.3)
     mini_magick (4.9.5)
     mini_mime (1.0.2)
@@ -211,6 +214,7 @@ DEPENDENCIES
   fog-aws
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  mime-types
   pg
   rails (~> 5.2.3)
   rails-i18n
