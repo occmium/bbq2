@@ -1,0 +1,15 @@
+<%= t '.title' %>
+----
+
+<%= @comment.body %>
+
+<%= t '.author' %>: <%= @comment.user_name %>
+
+--------------------------------
+<%= t '.event' %>: <%= @event.title %>
+<%= t '.datetime' %>: <%= l @event.datetime %>
+<%= t '.owner' %>: <%= @event.user.name %>
+
+<!--Event#comment-->
+
+<!--<%#= @greeting %>, find me in app/views/event_mailer/comment.text.erb-->

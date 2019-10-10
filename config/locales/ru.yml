@@ -67,3 +67,18 @@ ru:
       destroy_confirm: 'Вы уверены, что хотите удалить эту подписку?'
       cannot_subscribe_to_yourself: 'не может подписаться на своё собственное событие!'
       is_already_registered: 'зарегистрирована. Ипользуйте Войти для подписки'
+  event_mailer:
+    comment:
+      title: 'Новый комментарий'
+      author: 'Автор'
+      event: 'Событие'
+      datetime: 'Состоится'
+      owner: 'Организатор'
+    subscription:
+      title: 'Новая подписка'
+      name: 'Имя'
+      email: 'Email'
+      author: 'Автор'
+      event: 'Событие'
+      datetime: 'Состоится'
+      owner: 'Организатор'

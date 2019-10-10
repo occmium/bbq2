@@ -38,6 +38,9 @@ class CommentsController < ApplicationController
     @new_comment.user = current_user
 
     if @new_comment.save
+      # уведомляем всех подписчиков о новом комментарии
+      notify_subscribers(@event, @new_comment)
+
       # Если сохранился, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
@@ -90,5 +93,21 @@ class CommentsController < ApplicationController
   def comment_params
     # params.fetch(:comment, {})
     params.require(:comment).permit(:body, :user_name)
+  end
+
+  def notify_subscribers(event, comment)
+    # Собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
+    all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+
+    # По адресам из этого массива делаем рассылку
+    # Как и в подписках, берём EventMailer и его метод comment с параметрами
+    # И отсылаем в том же потоке
+    all_emails.each do |mail|
+      EventMailer.comment(event, comment, mail).deliver_now
+      # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
+      # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
+      # уловиях небольшого числа пользователей этоо можно стерпеть.
+      # В реальности рассылку надо выносить в background задачи.
+    end
   end
 end
