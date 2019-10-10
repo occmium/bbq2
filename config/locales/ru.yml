@@ -25,10 +25,7 @@ ru:
         datetime: 'Дата и время'
         description: 'Описание'
         #  Задача 55_1
-        mistake:
-          one: 'ошибка'
-          few: 'ошибки'
-          many:
+        mistake: ""
       subscription:
         user_name: 'Ваша представьтесь'
         user_email: 'Ваша электронная почта'
@@ -82,3 +79,20 @@ ru:
       event: 'Событие'
       datetime: 'Состоится'
       owner: 'Организатор'
+  devise:
+    passwords:
+      new:
+        forgot_your_password: 'Забыли свой пароль?'
+        send_me_reset_password_instructions: 'Выслать мне инструкции для сброса пароля'
+    sessions:
+      new:
+        sign_in: 'Войти'
+        sign: 'Вход'
+    registrations:
+      new:
+        sign_up: 'Регистрация'
+    shared:
+      links:
+        sign_in: 'Войти'
+        sign_up: 'Регистрация'
+        forgot_your_password: 'Забыли свой пароль?'
