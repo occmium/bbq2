@@ -1,0 +1,16 @@
+<!--# Задача 58-1 — bbq: уведомления о фотографиях по email-->
+Новое фото
+----
+<%= @photo.photo.url %>
+Имя: <%= @photo.user.name %>
+Email: <%=  @photo.user.email %>
+
+----------------------
+
+Событие: <%= @event.title %>
+Состоится: <%= l @event.datetime %>
+Организатор: <%= @event.user.name %>
+
+<!--Event#photo-->
+
+<!--<%#= @greeting %>, find me in app/views/event_mailer/photo.text.erb-->

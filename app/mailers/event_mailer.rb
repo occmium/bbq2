@@ -27,7 +27,21 @@ class EventMailer < ApplicationMailer
     @comment = comment
     @event = event
 
-    mail to: email, subject: "Новый комментарий @ #{event.title}"
+    mail to: email, subject: "Новый комментарий @#{event.title}"
+    # @greeting = "Hi"
+    # mail to: "to@example.org"
+  end
+
+  # Задача 58-1 — bbq: уведомления о фотографиях по email
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.event_mailer.photo.subject
+  def photo(event, photo, email)
+    @photo = photo
+    @event = event
+
+    mail to: email, subject: "Новое фото @#{event.title}"
     # @greeting = "Hi"
     # mail to: "to@example.org"
   end

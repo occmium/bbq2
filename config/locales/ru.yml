@@ -74,6 +74,7 @@ ru:
       event: 'Событие'
       datetime: 'Состоится'
       owner: 'Организатор'
+      body: 'Текст'
     subscription:
       title: 'Новая подписка'
       name: 'Имя'
@@ -82,6 +83,14 @@ ru:
       event: 'Событие'
       datetime: 'Состоится'
       owner: 'Организатор'
+    photo:
+      title: 'Новое фото'
+      name: 'Имя'
+      email: 'Емайл'
+      event: 'Событие'
+      author: 'Автор'
+      owner: 'Организатор'
+      datetime: 'Состоится'
   devise:
     passwords:
       new:

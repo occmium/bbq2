@@ -12,6 +12,9 @@ class PhotosController < ApplicationController
     @new_photo.user = current_user
 
     if @new_photo.save
+      # Задача 58-1 — bbq: уведомления о фотографиях по email
+      notify_subscribers(@event, @new_photo)
+
       # Если фотка сохранилась, редиректим на событие с сообщением
       redirect_to @event, notice: I18n.t('controllers.photos.created')
     else
@@ -54,6 +57,27 @@ class PhotosController < ApplicationController
   # c единственным полем photo
   def photo_params
     params.fetch(:photo, {}).permit(:photo)
+  end
+
+  # Задача 58-1 — bbq: уведомления о фотографиях по email
+  def notify_subscribers(event, photo)
+    # Собираем всех подписчиков и автора события в массив мэйлов,
+    # исключаем мэйл загрузившего фото и повторяющиеся мэйлы
+    all_emails = (event.subscriptions.map(&:user_email) +
+      [event.user.email] -
+      [current_user.email]
+    ).uniq
+
+    # По адресам из этого массива делаем рассылку
+    # Как и в подписках, берём EventMailer и его метод comment с параметрами
+    # И отсылаем в том же потоке
+    all_emails.each do |mail|
+      EventMailer.photo(event, photo, mail).deliver_now
+      # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
+      # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
+      # уловиях небольшого числа пользователей этоо можно стерпеть.
+      # В реальности рассылку надо выносить в background задачи.
+    end
   end
 end
 

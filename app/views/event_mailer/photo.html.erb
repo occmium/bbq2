@@ -1,0 +1,25 @@
+<!--# Задача 58-1 — bbq: уведомления о фотографиях по email-->
+<h1><%= t '.title' %></h1>
+<%= image_tag(@photo.photo.url) %>
+<%= image_url(@photo.photo.url) %>
+<p><%= t '.name' %>: <strong><%= @photo.user.name %></strong></p>
+
+<p><%= t '.email' %>: <strong><%= link_to @email, "mailto:#{@photo.user.email}" %></strong></p>
+<hr/>
+
+<%= t '.event' %>
+<h3><%= @event.title %></h3>
+<hr/>
+
+<%= t '.datetime' %>
+<h4><%= l @event.datetime %></h4>
+<hr/>
+
+<%= t '.owner' %>
+<h4><%= @event.user.name %></h4>
+
+<!--<h1>Event#photo</h1>-->
+
+<!--<p>-->
+<!--  <%#= @greeting %>, find me in app/views/event_mailer/photo.html.erb-->
+<!--</p>-->
