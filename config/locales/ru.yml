@@ -25,7 +25,10 @@ ru:
         datetime: 'Дата и время'
         description: 'Описание'
         #  Задача 55_1
-        mistake: ""
+        mistake:
+          one: 'ошибка'
+          few: 'ошибки'
+          many: ''
       subscription:
         user_name: 'Ваша представьтесь'
         user_email: 'Ваша электронная почта'
