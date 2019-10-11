@@ -95,9 +95,13 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body, :user_name)
   end
 
+  # Задача 58-2 — bbq: автор коммента не получает о нем письмо
   def notify_subscribers(event, comment)
     # Собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
-    all_emails = (event.subscriptions.map(&:user_email) + [event.user.email]).uniq
+    all_emails = (event.subscriptions.map(&:user_email) +
+      [event.user.email] -
+      [current_user.try(:email)]
+    ).uniq
 
     # По адресам из этого массива делаем рассылку
     # Как и в подписках, берём EventMailer и его метод comment с параметрами
