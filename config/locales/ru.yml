@@ -12,6 +12,7 @@ ru:
     attributes:
       photo:
         photo: 'Фотография'
+        user: 'Пользователь'
       user:
         email: 'Адрес электронной почты'
         name: 'Имя'

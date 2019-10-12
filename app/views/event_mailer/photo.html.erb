@@ -8,7 +8,10 @@
 <hr/>
 
 <%= t '.event' %>
-<h3><%= @event.title %></h3>
+<h3><%= link_to @event.title, event_url(@event) %></h3>
+<!--Alex's comment: -->
+<!-- © добавить ссылку на событие-->
+<!--https://goodprogrammer.ru/homework_solutions/11945#answer_49673-->
 <hr/>
 
 <%= t '.datetime' %>

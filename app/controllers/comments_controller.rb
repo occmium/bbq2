@@ -100,8 +100,15 @@ class CommentsController < ApplicationController
     # Собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
     all_emails = (event.subscriptions.map(&:user_email) +
       [event.user.email] -
-      [current_user.try(:email)]
+      # [current_user.try(:email)]
+      [comment.user.try(:email)]
     ).uniq
+    # Eugene's comment
+    # https://goodprogrammer.ru/homework_solutions/11946#answer_49649
+    # > © Во-первых, после такого изменения метод можно будет из контролера
+    # > куда-нибудь утащить в другой класс. Во-вторых, в будущем может
+    # > появиться возможность админу, например, оставлять или редактировать
+    # > комменты других юзеров или что-то вроде того.
 
     # По адресам из этого массива делаем рассылку
     # Как и в подписках, берём EventMailer и его метод comment с параметрами
