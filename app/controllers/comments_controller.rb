@@ -76,7 +76,6 @@ class CommentsController < ApplicationController
     redirect_to @event, message
   end
 
-
   private
 
   def set_event
@@ -97,7 +96,9 @@ class CommentsController < ApplicationController
 
   # Задача 58-2 — bbq: автор коммента не получает о нем письмо
   def notify_subscribers(event, comment)
-    # Собираем всех подписчиков и автора события в массив мэйлов, исключаем повторяющиеся
+    # Собираем всех подписчиков и автора события в массив мэйлов,
+    # исключаем повторяющиеся исключаем мэйл комментатора(если мэйл
+    # существует - например залогиненный/незалогиненный пользователь)
     all_emails = (event.subscriptions.map(&:user_email) +
       [event.user.email] -
       # [current_user.try(:email)]
