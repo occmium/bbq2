@@ -30,6 +30,7 @@ ru:
           one: 'ошибка'
           few: 'ошибки'
           many: ''
+        pincode: 'Пинкод доступа'
       subscription:
         user_name: 'Ваша представьтесь'
         user_email: 'Ваша электронная почта'
@@ -50,6 +51,7 @@ ru:
       created: 'Вы создали новое мероприятие'
       updated: 'Вы обновили мероприятие'
       destroyed: 'Вы удалили мероприятие'
+      wrong_pincode: 'Неверный пинкод'
     users:
       updated: 'Вы обновили свой профиль'
     photos:

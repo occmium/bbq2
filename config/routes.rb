@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :subscriptions , only: [:create, :destroy]
     # Вложенные в ресурс события ресурсы фотографий
     resources :photos, only: [:create, :destroy]
+    # Пост запрос по пути events#show
+    post :show, on: :member
   end
   resources :users, only: [:show, :edit, :update]
 end
