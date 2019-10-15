@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require yamap.js
 //= require activestorage
 //= require_tree .
