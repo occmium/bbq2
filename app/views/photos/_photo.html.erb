@@ -1,5 +1,16 @@
-<div class="event-photo buffer-both">
-  <%= link_to image_tag(photo.photo.thumb.url), photo.photo.url %>
+<%# Задача 59-2 — bbq: lightbox-галлерея фотографий %>
+<%# Прикрутите к фотографиям события симпатичную галлерею lightbox %>
+<div class="event-lightbox-photos buffer-both">
+  <% if current_user_can_edit?(photo) %>
+    <% del_icon = link_to fa_icon('ban'),
+                          event_photo_path(photo.event, photo),
+                          method: :delete, data: { confirm: t('are_you_sure') }
+    %>
+  <% end %>
+  <% image_title = "Добавил #{render partial: 'users/user', object: photo.user} #{del_icon}" %>
 
-  Добавил <%= render partial: 'users/user', object: photo.user %>
+  <%= link_to image_tag(photo.photo.thumb.url),
+              photo.photo.url,
+              data: { toggle: 'lightbox', title: image_title, gallery: 'event-photos' }
+  %>
 </div>
