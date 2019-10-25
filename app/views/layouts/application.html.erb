@@ -64,10 +64,14 @@
               <li><%= link_to 'Профиль', current_user %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path,
                               method: :delete %></li>
+              <li><%= link_to 'Помошь',
+                              "mailto:support@occmium.online" %></li>
             <% else %>
               <li><%= link_to 'Войти', new_user_session_path %></li>
               <li><%= link_to 'Зарегистрироваться',
                               new_user_registration_path %></li>
+              <li><%= link_to 'Напишите нам',
+                              "mailto:support@occmium.online" %></li>
             <% end %>
 <!--            <li><%#= link_to "Link1", "/path1"  %></li>-->
 <!--            <li><%#= link_to "Link2", "/path2"  %></li>-->
@@ -95,7 +99,7 @@
         </div><!--/span-->
       </div><!--/row-->
       <footer>
-        <p>&copy;<%= t 'app.company' %> 2019</p>
+        <p>&copy;<%= t 'app.company' %> 2019<br/>support@occmium.online</p>
       </footer>
     </div> <!-- /container -->
   </body>
