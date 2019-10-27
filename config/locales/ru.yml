@@ -94,6 +94,11 @@ ru:
       author: 'Автор'
       owner: 'Организатор'
       datetime: 'Состоится'
+  user_mailer:
+    register_new:
+      title: 'Новый пользователь'
+      name: 'Имя'
+      datetime: 'Появился в сети'
   devise:
     passwords:
       new:

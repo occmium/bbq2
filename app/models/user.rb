@@ -26,6 +26,11 @@ class User < ApplicationRecord
   # Мы использовали уже не привычный нам before_action, а after_commit,
   # чтобы быть уверенными, что все валидации прошли и юзер в базе.
 
+  # Добавим в модель юзера отправку почты после валидаций:
+  after_commit :notify_new_user, on: :create
+  # Мы использовали уже не привычный нам before_action, а after_commit,
+  # чтобы быть уверенными, что все валидации прошли и юзер в базе.
+
   # Аплоадер нужно добавить к модели юзеры
   mount_uploader :avatar, AvatarUploader
 
@@ -38,5 +43,9 @@ class User < ApplicationRecord
   def link_subscriptions
     Subscription.where(user_id: nil, user_email: self.email)
       .update_all(user_id: self.id)
+  end
+
+  def notify_new_user
+    UserMailer.register_new(self).deliver_now
   end
 end
