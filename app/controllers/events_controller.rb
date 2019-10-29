@@ -1,16 +1,22 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_event, only: [:show]
-  before_action :set_current_user_event, only: [:edit, :update, :destroy]
-
+  before_action :set_event, except: [:new, :create, :index]
   # Проверка пин-кода перед отображением события
   before_action :password_guard!, only: [:show]
 
+  # Будем искать событие не среди всех,
+  # а только у текущего пользователя
+  after_action :verify_policy_scoped, only: [:index]
+  after_action :verify_authorized, only: [:destroy, :edit, :update, :show]
+
   def index
-    @events = Event.all
+    # @events = Event.all
+    @events = policy_scope(Event)
   end
 
   def show
+    authorize @event
+
     @new_comment = @event.comments.build(params[:comment])
     @new_subscription = @event.subscriptions.build(params[:subscription])
     # Болванка модели для формы добавления фотографии
@@ -22,6 +28,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    authorize @event
   end
 
   def create
@@ -38,6 +45,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    authorize @event
     if @event.update(event_params)
       # redirect_to @event, notice: 'Event was successfully updated.'
       # Мы придумали такой адрес для сообщений контроллеров
@@ -49,6 +57,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    authorize @event
+
     @event.destroy
     # redirect_to events_url, notice: 'Event was successfully destroyed.'
     # Мы придумали такой адрес для сообщений контроллеров
@@ -57,12 +67,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  # Будем искать событие не среди всех,
-  # а только у текущего пользователя по id
-  def set_current_user_event
-    @event = current_user.events.find(params[:id])
-  end
 
   def set_event
     @event = Event.find(params[:id])

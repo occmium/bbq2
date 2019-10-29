@@ -116,3 +116,5 @@ ru:
         sign_in: 'Войти'
         sign_up: 'Регистрация'
         forgot_your_password: 'Забыли свой пароль?'
+  pundit:
+    not_authorized: 'учёный мужик не уполномочен'

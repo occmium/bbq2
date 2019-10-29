@@ -65,7 +65,7 @@
               <li><%= link_to 'Профиль', current_user %></li>
               <li><%= link_to 'Выйти', destroy_user_session_path,
                               method: :delete %></li>
-              <li><%= link_to 'Помошь',
+              <li><%= link_to 'Помощь',
                               "mailto:support@occmium.online" %></li>
             <% else %>
               <li><%= link_to 'Войти', new_user_session_path %></li>

@@ -41,6 +41,8 @@ gem 'fog-aws'
 
 gem 'mime-types'
 
+gem 'pundit', '~> 1.1'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -57,6 +59,14 @@ group :production do
 end
 
 group :development, :test do
+  # набор гемов для написания тестов
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  # Гем, который использует rspec, чтобы смотреть наш сайт
+  gem 'capybara'
+  # Гем, который позволяет смотреть, что видит capybara
+  gem 'launchy'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
