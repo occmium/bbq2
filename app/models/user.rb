@@ -56,6 +56,7 @@ class User < ApplicationRecord
   end
 
   def notify_new_user
-    UserMailer.register_new(self).deliver_now
+    # UserMailer.register_new(self).deliver_now
+    UserMailer.register_new(self).deliver_later
   end
 end

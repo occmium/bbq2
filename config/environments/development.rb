@@ -1,6 +1,13 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # config.active_job.queue_adapter = :resque
+  # config.active_job.queue_adapter = :inline
+  config.active_job.queue_adapter = :async
+
+  # Префикс для имени очередей
+  config.active_job.queue_name_prefix = "bbq_#{Rails.env}"
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -62,7 +69,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.asset_host = 'http://localhost:3000'
 
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: '587',
@@ -71,4 +79,5 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true
   }
+
 end

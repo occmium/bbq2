@@ -37,6 +37,9 @@ append :linked_files, "config/database.yml", "config/master.key", "config/creden
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
+# после рестарта сервера (в конце деплоя) перезапустятся и воркеры
+after 'deploy:restart', 'resque:restart'
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 

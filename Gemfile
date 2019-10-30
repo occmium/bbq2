@@ -43,6 +43,8 @@ gem 'mime-types'
 
 gem 'pundit', '~> 1.1'
 
+gem 'resque', '~> 1.27'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -79,6 +81,8 @@ group :development do
   gem 'capistrano-passenger', '~> 0.2'
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano-resque', '~> 0.2.3', require: false
+  gem 'letter_opener'
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   # gem 'web-console', '>= 3.3.0'
