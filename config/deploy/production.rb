@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 #
-server 'occmium.online', user: 'deploy', roles: %w{app db web resque_worker}
+server 'occmium.ru', user: 'deploy', roles: %w{app db web resque_worker}
 
 # При запуске воркера загружать Rails приложение
 set :resque_environment_task, true

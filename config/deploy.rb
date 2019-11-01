@@ -2,7 +2,8 @@
 lock "~> 3.11.2"
 
 # Это имя приложения
-set :application, "capistr"
+# set :application, "capistr"
+set :application, "bbq"
 
 # Это url вашего репозитория, откуда Capistrano
 # будет брать свежие версии исходников
@@ -14,7 +15,8 @@ set :repo_url, "git@github.com:occmium/bbq2.git"
 
 # Default deploy_to directory is /var/www/my_app_name
 # Папка, где будет храниться приложение
-set :deploy_to, '/home/deploy/apps/capistr'
+# set :deploy_to, '/home/deploy/apps/capistr'
+set :deploy_to, '/home/deploy/apps/bbq'
 # set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :format is :airbrussh.
