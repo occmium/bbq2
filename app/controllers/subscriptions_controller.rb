@@ -43,7 +43,8 @@ class SubscriptionsController < ApplicationController
       # Если сохранилось, отправляем письмо
       # Пишем название класса, потом метода и передаём параметры
       # И доставляем методом .deliver_now (то есть в этом же потоке)
-      EventMailer.subscription(@event, @new_subscription).deliver_now
+      # EventMailer.subscription(@event, @new_subscription).deliver_now
+      EventMailer.subscription(@event, @new_subscription).deliver_later
       # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
       # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
       # уловиях небольшого числа пользователей этоо можно стерпеть.

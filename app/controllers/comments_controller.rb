@@ -115,7 +115,8 @@ class CommentsController < ApplicationController
     # Как и в подписках, берём EventMailer и его метод comment с параметрами
     # И отсылаем в том же потоке
     all_emails.each do |mail|
-      EventMailer.comment(event, comment, mail).deliver_now
+      # EventMailer.comment(event, comment, mail).deliver_now
+      EventMailer.comment(event, comment, mail).deliver_later
       # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
       # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
       # уловиях небольшого числа пользователей этоо можно стерпеть.
