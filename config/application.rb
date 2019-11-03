@@ -30,5 +30,8 @@ module Bbq
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :ru
+    config.generators do |g|
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
   end
 end

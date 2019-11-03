@@ -4,7 +4,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :trackable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:vkontakte]
+
   # Юзер может создавать много событий
   has_many :events, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -62,5 +64,26 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def self.find_for_vkontakte_oauth(access_token)
+    # так как вк не даёт почту, назначаем её сами. Кончно в этом случае
+    # все рассылки теряются (включая функцию восстановления пароля), но в
+    # рамках домашнего задания - всё четка!
+    # byebug # мне в помощь
+    email = "#{access_token.extra.raw_info.id}_across@vkontakte.asdf"
+    user = where(email: email).first
+    name =  access_token.info.first_name
+
+    return user if user.present?
+
+    provider = access_token.provider
+    url = access_token.info.urls.Vkontakte
+
+    where(url: url, provider: provider).first_or_create! do |user|
+      user.email = email
+      user.password = Devise.friendly_token.first(16)
+      user.name = name
+    end
   end
 end

@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 
 ruby '2.5.5'
 
+gem 'omniauth'
+gem 'omniauth-vkontakte'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 
@@ -58,6 +61,10 @@ gem 'twitter-bootstrap-rails'
 
 group :production do
   gem 'pg'
+end
+
+group :test do
+  gem 'factory_bot_rails'
 end
 
 group :development, :test do
