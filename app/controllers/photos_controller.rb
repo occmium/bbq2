@@ -73,7 +73,8 @@ class PhotosController < ApplicationController
     # И отсылаем в том же потоке
     all_emails.each do |mail|
       # EventMailer.photo(event, photo, mail).deliver_now
-      EventMailer.photo(event, photo, mail).deliver_later
+      # EventMailer.photo(event, photo, mail).deliver_later
+      TransmitterPhotosJob.perform_later(event, photo, mail)
       # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
       # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
       # уловиях небольшого числа пользователей этоо можно стерпеть.

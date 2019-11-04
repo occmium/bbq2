@@ -116,11 +116,17 @@ class CommentsController < ApplicationController
     # И отсылаем в том же потоке
     all_emails.each do |mail|
       # EventMailer.comment(event, comment, mail).deliver_now
-      EventMailer.comment(event, comment, mail).deliver_later
+      # EventMailer.comment(event, comment, mail).deliver_later
       # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
       # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
       # уловиях небольшого числа пользователей этоо можно стерпеть.
       # В реальности рассылку надо выносить в background задачи.
+      TransmitterCommentsJob.perform_later(event, comment, mail)
+      # В контроллере создается 1 задача - "отправь всем подписчикам события
+      # уведомление", а уже в ней отправляются письма (причем в идеале так же
+      # через deliver_later)
+      # Это актуально для фото и для комментов. Для новой подписки, где
+      # отправляется одно письмо только автору эвента - это не актуально.
     end
   end
 end
