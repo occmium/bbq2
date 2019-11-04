@@ -1,6 +1,6 @@
 class EventPolicy < ApplicationPolicy
   def show?
-    pincode?(record)
+    true
   end
 
   def edit?
@@ -8,7 +8,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    is_authoise_user?(record)
+    is_authorise_user?(record)
   end
 
   def destroy?
@@ -19,12 +19,7 @@ class EventPolicy < ApplicationPolicy
     user.present?
   end
 
-  def pincode?(event)
-    event.pincode.blank? ||
-    (user.present? && (event.try(:user) == user))
-  end
-
-  def is_authoise_user?(event)
+  def is_authorise_user?(event)
     user.present? && (event.try(:user) == user)
   end
 
