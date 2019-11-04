@@ -67,11 +67,11 @@ class User < ApplicationRecord
   end
 
   def self.find_for_vkontakte_oauth(access_token)
-    # так как вк не даёт почту, назначаем её сами. Кончно в этом случае
-    # все рассылки теряются (включая функцию восстановления пароля), но в
-    # рамках домашнего задания - всё четка!
     # byebug # мне в помощь
-    email = "#{access_token.extra.raw_info.id}_across@vkontakte.asdf"
+    # email = "#{access_token.extra.raw_info.id}_across@vkontakte.asdf"
+    # правка 71-1 по наводке Александра
+    # https://goodprogrammer.ru/homework_solutions/12356#answer_51403
+    email = access_token.info.email
     user = where(email: email).first
     name =  access_token.info.first_name
 

@@ -8,10 +8,11 @@ RSpec.describe User, type: :model do
       double(
         :access_token,
         provider: 'vkontakte',
-        extra: double(raw_info: double(id: '1')),
+        # extra: double(raw_info: double(id: '1')),
         info: double(
           urls: double(Vkontakte: 'http://vk.com/id1'),
-          first_name: 'Josef'
+          first_name: 'Josef',
+          email: 'email@email.email'
         )
       )
     end
@@ -22,14 +23,14 @@ RSpec.describe User, type: :model do
         user = User.find_for_vkontakte_oauth(access_token)
 
         expect(user).to be_persisted
-        expect(user.email).to eq '1_across@vkontakte.asdf'
+        expect(user.email).to eq 'email@email.email'
         expect(user.name).to eq 'Josef'
       end
     end
 
     # Ситуация: юзер найден по почте
     context 'when user is found by email' do
-      let!(:existing_user) { create(:user, email: '1_across@vkontakte.asdf') }
+      let!(:existing_user) { create(:user, email: 'email@email.email') }
       let!(:some_other_user) { create(:user) }
 
       it 'returns this user' do
