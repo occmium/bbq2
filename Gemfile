@@ -37,6 +37,8 @@ group :development, :test do
   gem 'capybara'
   # Гем, который позволяет смотреть, что видит capybara
   gem 'launchy'
+  # ALERT CVE-2019-15587
+  gem "loofah", ">= 2.3.1"
   gem 'sqlite3'
   gem 'byebug'#, platforms: [:mri, :mingw, :x64_mingw]
 end
