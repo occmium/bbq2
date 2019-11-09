@@ -13,7 +13,8 @@ class PhotosController < ApplicationController
 
     if @new_photo.save
       # Задача 58-1 — bbq: уведомления о фотографиях по email
-      notify_subscribers(@event, @new_photo)
+      # Задача 70-1 — bbq: с отправкой писем на ActiveJob
+      NotificationTransmitterJob.perform_later('photo', @new_photo)
 
       # Если фотка сохранилась, редиректим на событие с сообщением
       redirect_to @event, notice: I18n.t('controllers.photos.created')
@@ -58,86 +59,4 @@ class PhotosController < ApplicationController
   def photo_params
     params.fetch(:photo, {}).permit(:photo)
   end
-
-  # Задача 58-1 — bbq: уведомления о фотографиях по email
-  def notify_subscribers(event, photo)
-    # Собираем всех подписчиков и автора события в массив мэйлов,
-    # исключаем мэйл загрузившего фото и повторяющиеся мэйлы
-    all_emails = (event.subscriptions.map(&:user_email) +
-      [event.user.email] -
-      [current_user.email]
-    ).uniq
-
-    # По адресам из этого массива делаем рассылку
-    # Как и в подписках, берём EventMailer и его метод comment с параметрами
-    # И отсылаем в том же потоке
-    all_emails.each do |mail|
-      # EventMailer.photo(event, photo, mail).deliver_now
-      # EventMailer.photo(event, photo, mail).deliver_later
-      TransmitterPhotosJob.perform_later(event, photo, mail)
-      # Для учебных целей прямо тут используем .deliver_now, а не в отдельном
-      # рельсоприложении. Будем ждать окончания рассыки прям на странице - в
-      # уловиях небольшого числа пользователей этоо можно стерпеть.
-      # В реальности рассылку надо выносить в background задачи.
-    end
-  end
 end
-
-# class PhotosController < ApplicationController
-#   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-#
-#   # GET /photos
-#   def index
-#     @photos = Photo.all
-#   end
-#
-#   # GET /photos/1
-#   def show
-#   end
-#
-#   # GET /photos/new
-#   def new
-#     @photo = Photo.new
-#   end
-#
-#   # GET /photos/1/edit
-#   def edit
-#   end
-#
-#   # POST /photos
-#   def create
-#     @photo = Photo.new(photo_params)
-#
-#     if @photo.save
-#       redirect_to @photo, notice: 'Photo was successfully created.'
-#     else
-#       render :new
-#     end
-#   end
-#
-#   # PATCH/PUT /photos/1
-#   def update
-#     if @photo.update(photo_params)
-#       redirect_to @photo, notice: 'Photo was successfully updated.'
-#     else
-#       render :edit
-#     end
-#   end
-#
-#   # DELETE /photos/1
-#   def destroy
-#     @photo.destroy
-#     redirect_to photos_url, notice: 'Photo was successfully destroyed.'
-#   end
-#
-#   private
-#     # Use callbacks to share common setup or constraints between actions.
-#     def set_photo
-#       @photo = Photo.find(params[:id])
-#     end
-#
-#     # Only allow a trusted parameter "white list" through.
-#     def photo_params
-#       params.fetch(:photo, {})
-#     end
-# end
